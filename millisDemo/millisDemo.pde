@@ -9,7 +9,7 @@ void draw() {
   background(255);
 
   if (millis() > timeToWait) {
-    fill(0, 255, 0);
+    fill(255, 0, 0);
   }
   else {
     fill(0);
