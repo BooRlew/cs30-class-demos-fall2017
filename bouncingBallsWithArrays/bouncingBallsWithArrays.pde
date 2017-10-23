@@ -5,16 +5,18 @@
 float buttonX, buttonY, buttonWidth, buttonHeight;
 float buttonTop, buttonBottom, buttonLeftSide, buttonRightSide;
 float[] ballX, ballY, ballSize, dxBall, dyBall;
+color[] ballColor;
 int numberOfBalls;
 int state;
 int bounceCounter;
 
 void setup() {
-  size(800, 800);
+  //size(800, 800);
+  fullScreen();
 
   state = 0;
   bounceCounter = 0;
-  numberOfBalls = 10;
+  numberOfBalls = 50;
 
   //declare where the button should be
   buttonX = 100;
@@ -34,14 +36,16 @@ void setup() {
   ballSize = new float[numberOfBalls];
   dxBall = new float[numberOfBalls];
   dyBall = new float[numberOfBalls];
+  ballColor = new color[numberOfBalls];
 
   //set values for ball
   for (int counter=0; counter<numberOfBalls; counter++) {
     ballX[counter] = width/2;
     ballY[counter] = height/2;
     ballSize[counter] = random(10, 100);
-    dxBall[counter] = random(-20, 20);
-    dyBall[counter] = random(-20, 20);
+    dxBall[counter] = random(-10, 10);
+    dyBall[counter] = random(-10, 10);
+    ballColor[counter] = color(random(255), random(255), random(255), random(255));
   }
 }
 
@@ -84,6 +88,8 @@ void bounceBall() {
     displayBounces();
 
     //display ball
+    noStroke();
+    fill(ballColor[i]);
     ellipse(ballX[i], ballY[i], ballSize[i], ballSize[i]);
   }
 }
