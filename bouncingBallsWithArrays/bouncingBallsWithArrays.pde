@@ -16,7 +16,7 @@ void setup() {
 
   state = 0;
   bounceCounter = 0;
-  numberOfBalls = 3;
+  numberOfBalls = 10;
 
   //declare where the button should be
   buttonWidth = 600;
@@ -40,9 +40,10 @@ void setup() {
 
   //set values for ball
   for (int counter=0; counter<numberOfBalls; counter++) {
-    ballX[counter] = width/2;
-    ballY[counter] = height/2;
-    ballSize[counter] = 250; //random(10, 100);
+    ballSize[counter] = random(10, 100);
+    ballX[counter] = random(ballSize[counter], width-ballSize[counter]);
+    ballY[counter] = random(ballSize[counter], height-ballSize[counter]);
+    
     dxBall[counter] = random(-10, 10);
     dyBall[counter] = random(-10, 10);
     ballColor[counter] = color(random(255), random(255), random(255), random(255));
@@ -73,6 +74,11 @@ void detectCollision() {
         if (distanceBetweenBalls <= sumOfRadii) {  //collision!!!
           bounceCounter++;
           //put bounce on collision code here!
+          dxBall[i] *= -1;
+          dyBall[i] *= -1;
+          
+          //dxBall[j] *= -1;
+          //dyBall[j] *= -1;
         }
       }
     }
