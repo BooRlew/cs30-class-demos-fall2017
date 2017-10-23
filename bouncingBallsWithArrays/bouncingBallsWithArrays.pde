@@ -16,13 +16,13 @@ void setup() {
 
   state = 0;
   bounceCounter = 0;
-  numberOfBalls = 50;
+  numberOfBalls = 3;
 
   //declare where the button should be
-  buttonX = 100;
-  buttonY = 300;
   buttonWidth = 600;
   buttonHeight = 200;
+  buttonX = width/2 - buttonWidth/2;
+  buttonY = height/2 - buttonHeight/2;
 
   //calculate sides of button
   buttonTop = buttonY;
@@ -42,7 +42,7 @@ void setup() {
   for (int counter=0; counter<numberOfBalls; counter++) {
     ballX[counter] = width/2;
     ballY[counter] = height/2;
-    ballSize[counter] = random(10, 100);
+    ballSize[counter] = 250; //random(10, 100);
     dxBall[counter] = random(-10, 10);
     dyBall[counter] = random(-10, 10);
     ballColor[counter] = color(random(255), random(255), random(255), random(255));
@@ -55,9 +55,27 @@ void draw() {
     displayButton();
   } else if (state == 1) {  //bouncing ball part
     bounceBall();
+    detectCollision();
     //checkIfGameDone();
   } else if (state == 2) {  //ending screen
     endingScreen();
+  }
+}
+
+void detectCollision() {
+  for (int i=0; i<numberOfBalls; i++) {
+    for (int j=0; j<numberOfBalls; j++) {
+      //don't check for collision with self
+      if (i != j) {
+        float distanceBetweenBalls = dist(ballX[i], ballY[i], ballX[j], ballY[j]);
+        float sumOfRadii = ballSize[i]/2 + ballSize[j]/2;
+        
+        if (distanceBetweenBalls <= sumOfRadii) {  //collision!!!
+          bounceCounter++;
+          //put bounce on collision code here!
+        }
+      }
+    }
   }
 }
 
@@ -104,13 +122,13 @@ void bounceIfRequired(int ballNumber) {
   //is it hitting the right or left side?
   if ( (ballX[ballNumber] > width - ballSize[ballNumber]/2) || (ballX[ballNumber] < 0 + ballSize[ballNumber]/2) ) {
     dxBall[ballNumber] *= -1;
-    bounceCounter++;
+    //bounceCounter++;
   }
 
   //is it hitting the top or bottom?
   if ( (ballY[ballNumber] > height - ballSize[ballNumber]/2) || (ballY[ballNumber] < 0 + ballSize[ballNumber]/2) ) {
     dyBall[ballNumber] *= -1;
-    bounceCounter++;
+    //bounceCounter++;
   }
 }
 
