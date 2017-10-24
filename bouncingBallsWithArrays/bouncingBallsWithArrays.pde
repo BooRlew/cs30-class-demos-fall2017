@@ -1,5 +1,5 @@
-// State Variables Demo
-// Sept 28, 2017
+// Bouncing Balls with Arrays Demo
+// Oct 24, 2017
 
 //globals
 float buttonX, buttonY, buttonWidth, buttonHeight;
@@ -16,7 +16,7 @@ void setup() {
 
   state = 0;
   bounceCounter = 0;
-  numberOfBalls = 10;
+  numberOfBalls = 50;
 
   //declare where the button should be
   buttonWidth = 600;
@@ -74,11 +74,22 @@ void detectCollision() {
         if (distanceBetweenBalls <= sumOfRadii) {  //collision!!!
           bounceCounter++;
           //put bounce on collision code here!
-          dxBall[i] *= -1;
-          dyBall[i] *= -1;
+          float tempdx = dxBall[i];
+          float tempdy = dyBall[i];
           
-          //dxBall[j] *= -1;
-          //dyBall[j] *= -1;
+          dxBall[i] = dxBall[j]; //*= -1;
+          dyBall[i] = dyBall[j]; //*= -1;
+          
+          dxBall[j] = tempdx;
+          dyBall[j] = tempdy;
+          
+          //hacky method
+          //move by one 'step', to avoid a second collision event
+          ballX[i] += dxBall[i];
+          ballY[i] += dyBall[i];
+          
+          ballX[j] += dxBall[j];
+          ballY[j] += dyBall[j];
         }
       }
     }
