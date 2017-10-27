@@ -25,6 +25,27 @@ void keyPressed() {
   if (key == ' ') {
     update();
   }
+  if (key == 'c') {
+    clearBoard();
+  }
+}
+
+void mousePressed() {
+  int xCord = int(mouseX/cellWidth);
+  int yCord = int(mouseY/cellHeight);
+  
+  //toggle
+  if (board[xCord][yCord] == 1) {
+    board[xCord][yCord] = 0;
+  }
+  else {
+    board[xCord][yCord] = 1;
+  }
+}
+
+void clearBoard() {
+  //a new array has default values of 0
+  board = new int[cols][rows];
 }
 
 void update() {
