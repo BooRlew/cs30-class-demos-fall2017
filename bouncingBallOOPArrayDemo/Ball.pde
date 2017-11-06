@@ -27,13 +27,11 @@ class Ball {
   //is it hitting the right or left side?
   if ( (x > width - size/2) || (x < 0 + size/2) ) {
     dx *= -1;
-    bounceCounter++;
   }
 
   //is it hitting the top or bottom?
   if ( (y > height - size/2) || (y < 0 + size/2) ) {
     dy *= -1;
-    bounceCounter++;
   }
 }
 }

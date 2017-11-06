@@ -8,7 +8,7 @@ float buttonTop, buttonBottom, buttonLeftSide, buttonRightSide;
 int state;
 int bounceCounter;
 
-Ball theBall;
+Ball[] theBalls = new Ball[20];
 
 void setup() {
   size(800, 800);
@@ -28,7 +28,9 @@ void setup() {
   buttonLeftSide = buttonX;
   buttonRightSide = buttonX + buttonWidth;
 
-  theBall = new Ball();
+  for (int i=0; i<theBalls.length; i++) {
+    theBalls[i] = new Ball();
+  }
 }
 
 void draw() {
@@ -36,8 +38,9 @@ void draw() {
   if (state == 0) {  //start screen
     displayButton();
   } else if (state == 1) {  //bouncing ball part
-    theBall.bounceBall();
-    displayBounces();
+    for (int i=0; i<theBalls.length; i++) {
+      theBalls[i].bounceBall();
+    }
     checkIfGameDone();
   } else if (state == 2) {  //ending screen
     endingScreen();
