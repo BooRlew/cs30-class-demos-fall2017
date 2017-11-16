@@ -4,37 +4,26 @@
 //   - followMouse()    [where the mouse is, so is the stickman]
 //   - wasdMove()       [move the stickman with WASD keys]
 
-float x, y;
+Stickman evan;
+Stickman caelan;
+Stickman anthony;
 
 void setup() {
   size(800, 800);
   
-  x = width/2;
-  y = height/2;
+  evan = new Stickman(100, 100);
+  caelan = new Stickman();
+  anthony = new Stickman(400, 400);
 }
 
 void draw() {
   background(255);
   
-  displayStickman();
+  evan.followMouse();
+  caelan.bounceAround();
+  anthony.wasdMove();
+  
+  evan.display();
+  caelan.display();
+  anthony.display();
 }
-
-void displayStickman() {
-    pushMatrix();
-      translate(x, y);
-  
-      //head
-      ellipse(0, 0, 50, 50);
-  
-      //body
-      line(0, 25, 0, 100);
-  
-      //legs
-      line(0, 100, -25, 125);
-      line(0, 100, 25, 125);
-  
-      //arms
-      line(-25, 50, 25, 50);
-
-    popMatrix();
-  }
